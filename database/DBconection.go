@@ -3,20 +3,16 @@ package database
 import (
 	"context"
 	//"fmt"
-	"os"
 	"log"
-
-	
-	"go.mongodb.org/mongo-driver/mongo"
-		"go.mongodb.org/mongo-driver/mongo/options"
+	"os"
 	"github.com/joho/godotenv"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
-
-
 
 // !Execute the connection to database
 // !Return to Mongo the connection
-var MongoC = conectDB()
+var MongoCN = conectDB()
 
 // !Connect to URl
 
@@ -50,7 +46,12 @@ func conectDB() *mongo.Client {
 // !Check the connection
 func CheckConnection() int {
 
-	err := MongoC.Ping(context.TODO(), nil)
+	if load != nil {
+		log.Fatal(load)
+		return 0
+	}
+
+	err := MongoCN.Ping(context.TODO(), nil)
 	if err != nil {
 		return 0
 	}
@@ -58,5 +59,3 @@ func CheckConnection() int {
 	return 1
 
 }
-
-
