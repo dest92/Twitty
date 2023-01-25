@@ -56,7 +56,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, status, err := database.InsertUser(t)
+	_, status, err := database.CreateUser(t)
 
 	if err != nil {
 		http.Error(w, "Error registering user: "+err.Error(), 400)
