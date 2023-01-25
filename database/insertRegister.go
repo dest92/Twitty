@@ -12,7 +12,7 @@ func CreateUser(u models.User) (string, bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel() //Cancel the context with the timeout
 
-	db := MongoCN.Database("twitty")
+	db := MongoCN.Database("Twitty")
 
 	col := db.Collection("users")
 

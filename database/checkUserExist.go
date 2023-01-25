@@ -13,7 +13,7 @@ func UserExists(email string) (models.User, bool, string) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
-	db := MongoCN.Database("twitty")
+	db := MongoCN.Database("Twitty")
 
 	col := db.Collection("users")
 
