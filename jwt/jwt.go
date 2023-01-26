@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-//GenerateJWT generates the JWT
+//GenerateJWT generates the JWT 
 
 func GenerateJWT(t models.User) (string, error) {
 
