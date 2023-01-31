@@ -5,7 +5,6 @@ import (
 	"github.com/dest92/Twitty/database"
 	"github.com/dest92/Twitty/models"
 	jwt "github.com/dgrijalva/jwt-go"
-	"log"
 	"os"
 	"strings"
 )
@@ -30,15 +29,12 @@ func ProcessToken(tk string) (*models.Claim, bool, string, error) {
 	}
 
 	tk = strings.TrimSpace(splitToken[1]) //Remove spaces from the token
-	log.Print("Token: ", tk)
 
 	//Parse the token and check if it is valid
 
 	tkn, err := jwt.ParseWithClaims(tk, claims, func(token *jwt.Token) (interface{}, error) { //Parse the token and check if it is valid
 		return myKeyByte, nil
 	})
-
-	log.Print("Token valid error: ", err.Error())
 
 	//If the token is valid, check if the user exists in the database
 	if err == nil {
