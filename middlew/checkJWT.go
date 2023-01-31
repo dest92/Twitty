@@ -7,8 +7,8 @@ import (
 
 /*The CheckJWT function is an http middleware that is responsible for validating the JWT token sent in the request header.
 It uses the ProcessToken function to get the token from the request header and verify it.
-If the token is valid, the next.ServeHTTP function is called to continue executing the request. I
-f the token is invalid or has some error, a "Bad Request" HTTP status error is sent and execution stops.*/
+If the token is valid, the next.ServeHTTP function is called to continue executing the request.
+If the token is invalid or has some error, a "Bad Request" HTTP status error is sent and execution stops.*/
 
 func CheckJWT(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
