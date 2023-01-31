@@ -19,6 +19,7 @@ func Handlers() {
 	//! Routes
 	router.HandleFunc("/register", middlew.CheckDB(routers.Register)).Methods("POST")
 	router.HandleFunc("/login", middlew.CheckDB(routers.Login)).Methods("POST")
+	router.HandleFunc("/seeaccount", middlew.CheckJWT(routers.SeeAccount)).Methods("POST")
 
 
 	
