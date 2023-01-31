@@ -5,6 +5,8 @@ import (
 	"github.com/dest92/Twitty/database"
 	"github.com/dest92/Twitty/models"
 	jwt "github.com/dgrijalva/jwt-go"
+	"log"
+	"os"
 	"strings"
 )
 
@@ -14,8 +16,8 @@ var UserID string //Global variable to store the ID of the user who made the req
 // Extract values from the token
 func ProcessToken(tk string) (*models.Claim, bool, string, error) {
 
-	const myKey = "Twitty" //Constant key for the token
-	myKeyByte := []byte(myKey)
+	//Constant key for the token
+	myKeyByte := []byte(os.Getenv("PRIVATE_KEY"))
 	claims := &models.Claim{} //Check token needs a pointer to a Claim struct
 
 	splitToken := strings.Split(tk, "Bearer") //Split the standard "bearer" from the token to get the value
@@ -28,6 +30,7 @@ func ProcessToken(tk string) (*models.Claim, bool, string, error) {
 	}
 
 	tk = strings.TrimSpace(splitToken[1]) //Remove spaces from the token
+	log.Print("Token: ", tk)
 
 	//Parse the token and check if it is valid
 
@@ -35,20 +38,20 @@ func ProcessToken(tk string) (*models.Claim, bool, string, error) {
 		return myKeyByte, nil
 	})
 
+	log.Print("Token valid error: ", err.Error())
+
 	//If the token is valid, check if the user exists in the database
 	if err == nil {
 		_, found, _ := database.UserExists(claims.Email)
 		if found {
 			Email = claims.Email
 			UserID = claims.ID.Hex()
-			return claims, found, UserID, nil
 		}
-		//If the user does not exist, return an error
-		return claims, false, string(""), errors.New("user not found")
+		return claims, found, UserID, nil
 	}
 
 	if !tkn.Valid {
-		return claims, false, string(""), errors.New("invalid token")
+		return claims, false, string(""), errors.New("invalid token test")
 	}
 
 	return claims, false, string(""), err
