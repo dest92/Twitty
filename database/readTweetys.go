@@ -14,8 +14,8 @@ func ReadTweety(ID string, page int64) ([]*models.ReadTweety, bool) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
-	db := MongoCN.Database("twitty")
-	col := db.Collection("tweety")
+	db := MongoCN.Database("Twitty")
+	col := db.Collection("tweetys")
 
 	var results []*models.ReadTweety
 
@@ -24,12 +24,12 @@ func ReadTweety(ID string, page int64) ([]*models.ReadTweety, bool) {
 	}
 
 	// Set the options to the query
-	options := options.Find()
-	options.SetLimit(20)                              // Limit the results to 20
-	options.SetSort(bson.D{{Key: "date", Value: -1}}) // Sort the results by date in descending order
-	options.SetSkip((page - 1) * 20)                  // Skip the first 20 results
+	queryoptions := options.Find()
+	queryoptions.SetLimit(20)                              // Limit the results to 20
+	queryoptions.SetSort(bson.D{{Key: "date", Value: -1}}) // Sort the results by date in descending order
+	queryoptions.SetSkip((page - 1) * 20)                  // Skip the first 20 results
 
-	cursor, err := col.Find(ctx, condition, options) //Cursor is a pointer to the results
+	cursor, err := col.Find(ctx, condition, queryoptions) //Cursor is a pointer to the results
 	if err != nil {
 		log.Fatal(err.Error())
 		return results, false
