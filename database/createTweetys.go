@@ -15,14 +15,13 @@ func CreateTweety(t models.Tweety) (string, bool, error) {
 	db := MongoCN.Database("Twitty")
 	col := db.Collection("tweetys")
 
-	registro := bson.M{
+	register := bson.M{
 		"userid":  t.UserID,
 		"message": t.Message,
 		"date":    t.Date,
 	}
-	
 
-	result, err := col.InsertOne(ctx, registro)
+	result, err := col.InsertOne(ctx, register)
 	if err != nil {
 		return "", false, err
 	}
