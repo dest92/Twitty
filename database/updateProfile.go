@@ -56,6 +56,17 @@ func UpdateProfile(u models.User, ID string) (bool, error) {
 		profile["website"] = u.WebSite
 	}
 
+	//If the avatar is not empty, add it to the map
+	if len(u.Avatar) > 0 {
+		profile["avatar"] = u.Avatar
+	}
+
+	//If the banner is not empty, add it to the map
+
+	if len(u.Banner) > 0 {
+		profile["banner"] = u.Banner
+	}
+
 	//Set fields to update
 
 	updtString := bson.M{
