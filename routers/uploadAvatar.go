@@ -6,7 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"path"
+	"path/filepath"
 )
 
 func UploadAvatar(w http.ResponseWriter, r *http.Request) {
@@ -17,7 +17,7 @@ func UploadAvatar(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var extension = path.Ext(handler.Filename) //Get the extension of the file
+	var extension = filepath.Ext(handler.Filename) //Get the extension of the file
 
 	var archive string = "uploads/avatars/" + UserID + extension
 
