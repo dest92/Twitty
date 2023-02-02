@@ -23,6 +23,7 @@ func Handlers() {
 	router.HandleFunc("/updateProfile", middlew.CheckJWT(routers.ModifyProfile)).Methods("PUT")
 	router.HandleFunc("/tweety", middlew.CheckJWT(routers.CreateTweety)).Methods("POST")
 	router.HandleFunc("/readTweety", middlew.CheckJWT(routers.LookTweety)).Methods("GET")
+	router.HandleFunc("/eraseTweety", middlew.CheckJWT(routers.EraseTweety)).Methods("DELETE")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
