@@ -53,12 +53,7 @@ func ReadAllUsers(ID string, page int64, search string, typeUser string) ([]*mod
 
 		include = false // To check if the user should be included
 
-		found, err = GetRelation(r) // Check if the user is already following the user
-
-		if err != nil {
-			log.Println(err.Error())
-			return results, false
-		}
+		found, _ = GetRelation(r) // Check if the user is already following the user
 
 		//New is the users that the user is not following
 
@@ -76,7 +71,7 @@ func ReadAllUsers(ID string, page int64, search string, typeUser string) ([]*mod
 			include = false
 		}
 
-		if !include {
+		if include {
 			//Erase the fields that we don't want to send to the frontend
 			u.Password = ""
 			u.Biography = ""
