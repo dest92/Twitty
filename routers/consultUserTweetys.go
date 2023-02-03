@@ -9,12 +9,6 @@ import (
 )
 
 func ConsultUserTweetys(w http.ResponseWriter, r *http.Request) {
-	// Get the id of the user to consult
-	ID := r.URL.Query().Get("id")
-	if ID == "" {
-		http.Error(w, "Missing 'id' parameter", http.StatusBadRequest)
-		return
-	}
 
 	// Get the page parameter
 	pageStr := r.URL.Query().Get("page")
@@ -31,7 +25,7 @@ func ConsultUserTweetys(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Consult the user tweetys
-	result, status := database.ReadUserTweetys(ID, int64(page))
+	result, status := database.ReadUserTweetys(UserID, int64(page))
 	if !status {
 		http.Error(w, "Error reading user tweetys", http.StatusBadRequest)
 		return
