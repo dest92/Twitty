@@ -19,4 +19,5 @@ type User struct {
 	Biography string             `bson:"biography" json:"biography,omitempty"`
 	Location  string             `bson:"location" json:"location,omitempty"`
 	WebSite   string             `bson:"webSite" json:"webSite,omitempty"`
+	Verified  bool               `bson:"verified" json:"verified,omitempty"`
 }
