@@ -18,6 +18,11 @@ func GenerateRelation(w http.ResponseWriter, r *http.Request) {
 	t.UserID = UserID
 	t.UserRelationID = ID
 
+	if t.UserID == t.UserRelationID {
+		http.Error(w, "You cannot follow yourself", 400)
+		return
+	}
+
 	status, err := database.CreateRelation(t)
 	if err != nil {
 		http.Error(w, "An error occurred while trying to generate the relation "+err.Error(), 400)

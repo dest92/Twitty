@@ -20,4 +20,6 @@ type User struct {
 	Location  string             `bson:"location" json:"location,omitempty"`
 	WebSite   string             `bson:"webSite" json:"webSite,omitempty"`
 	Verified  bool               `bson:"verified" json:"verified,omitempty"`
+	Followers int                `bson:"followers" json:"followers,omitempty"`
+	Following int                `bson:"following" json:"following,omitempty"`
 }
