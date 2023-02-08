@@ -4,50 +4,47 @@ import (
 	"context"
 	"github.com/dest92/Twitty/models"
 	"go.mongodb.org/mongo-driver/bson"
+	"log"
 	"time"
 )
 
 // ReadUserTweetys reads all the tweetys from the database
 
-func ReadUserTweetys(ID string, page int64) ([]*models.TweetysResponse, bool) {
-
+func ReadUserTweetys(IDUser string, page int) ([]models.TweetysResponse, bool) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
 	db := MongoCN.Database("Twitty")
 	col := db.Collection("relation")
 
-	skip := (page - 1) * 20 // Skip the first 20 results
+	skip := (page - 1) * 20
 
-	conditions := make([]bson.M, 0)                                         // To store the conditions
-	conditions = append(conditions, bson.M{"$match": bson.M{"userid": ID}}) // Match the user id
-	conditions = append(conditions, bson.M{
-		"$lookup": bson.M{ // Join the relation collection with the tweety collection
-			"from":         "tweety",
-			"localField":   "userRelationId",
-			"foreignField": "userid",
-			"as":           "tweety",
-		}})
+	conditions := []bson.M{
+		{"$match": bson.M{"userId": IDUser}},
+		{"$lookup": bson.M{"from": "tweetys", "localField": "userRelationId", "foreignField": "userid", "as": "tweetys"}},
+		{"$unwind": "$tweetys"},
+		{"$sort": bson.M{"tweetys.date": -1}},
+		{"$skip": skip},
+		{"$limit": 20},
+	}
 
-	conditions = append(conditions, bson.M{"$unwind": "$tweety"})               // Unwind the tweety array
-	conditions = append(conditions, bson.M{"$sort": bson.M{"tweety.date": -1}}) // Sort the tweety by date
-	conditions = append(conditions, bson.M{"$skip": skip})                      // Skip the first 20 results
-	conditions = append(conditions, bson.M{"$limit": 20})                       // Limit the results to 20
-
-	cursor, err := col.Aggregate(ctx, conditions) // Aggregate the conditions
-
+	cursor, err := col.Aggregate(ctx, conditions)
 	if err != nil {
+		log.Println("Error adding conditions: ", err)
 		return nil, false
 	}
 
-	var result []*models.TweetysResponse // To send to http
-
-	err = cursor.All(ctx, &result) // Get all the results
-
+	var result []models.TweetysResponse
+	err = cursor.All(ctx, &result)
 	if err != nil {
-		return result, false
+		log.Println("Error getting results: ", err)
+		return nil, false
+	}
+
+	if len(result) == 0 {
+		log.Println("No results found")
+		return nil, false
 	}
 
 	return result, true
-
 }

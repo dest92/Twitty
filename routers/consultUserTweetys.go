@@ -25,7 +25,7 @@ func ConsultUserTweetys(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Consult the user tweetys
-	result, status := database.ReadUserTweetys(UserID, int64(page))
+	result, status := database.ReadUserTweetys(UserID, int(page))
 	if !status {
 		http.Error(w, "Error reading user tweetys", http.StatusBadRequest)
 		return
