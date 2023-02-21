@@ -1,17 +1,19 @@
 import React from "react";
 import { useState } from "react";
-import { Button } from "react-bootstrap";
+import SignInSignUp from "./page/SignInSignUp/";
 
 export default function App() {
-  const [user, setUser] = useState();
-
-  // return (
-  //   <div>{user ? <h1>You´re logged</h1> : <h1>You´re not logged</h1>}</div>
-  // );
+  const [user, setUser] = useState(true);
 
   return (
     <div>
-      <Button>Login</Button>
+      {user ? (
+        <div>
+          <SignInSignUp />
+        </div>
+      ) : (
+        <h1>You´re not logged</h1>
+      )}
     </div>
   );
 }
