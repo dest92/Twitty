@@ -1,8 +1,9 @@
 @import "../../../scss/index.scss";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
 
 .basic-modal {
   .modal-content {
-    background-color: $background-grey-dark;
+    background-image: linear-gradient(to right, #192734, #2f4961);
     border-radius: 25px;
 
     .modal-header {
@@ -21,5 +22,25 @@
     .modal-body {
       padding: 20px 40px 40px 40px;
     }
+
+    h2 {
+      color: antiquewhite;
+      font-family: "DM Sans", sans-serif;
+    }
+
+    button {
+      margin-top: 5%;
+      float: right;
+      border-radius: 50px;
+      font-family: "DM Sans", sans-serif;
+      width: auto;
+      max-width: 30%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .modal-backdrop {
+    width: 100%;
   }
 }

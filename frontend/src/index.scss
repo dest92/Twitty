@@ -7,7 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $background-grey-dark;
+  background-image: linear-gradient(to right, #15212b, #475c67);
 }
 
 code {
@@ -20,7 +20,8 @@ code {
 }
 
 .btn.btn-primary {
-  background-color: $primary;
+  background-image: linear-gradient(to top right, #106fb8, #1b95f1);
+
   border-color: $primary;
 
   &:hover {
@@ -30,10 +31,40 @@ code {
 
 .btn.btn-outline-primary {
   border-color: $border-primary;
-
+  color: antiquewhite;
   &:hover,
   &:focus,
-  &:active{
-    background-color: rgba(29,2641,241,0.1) !important;
+  &:active {
+    background-color: rgba(29, 2641, 241, 0.1) !important;
   }
 }
+
+input[type="password"]::-webkit-inner-spin-button {
+  color: white !important;
+}
+
+input[type="password"]::-moz-range-thumb {
+  color: white !important;
+}
+
+input.form-control,
+textarea.form-control {
+  background-color: $background-dark-light;
+  border-radius: 5px;
+  border: 0;
+  border-bottom: 1px solid $border-grey;
+  color: $font-light !important;
+
+  &::placeholder {
+    color: rgb(143, 135, 125);
+  }
+
+  &:focus,
+  :hover {
+    background-color: $background-dark-light;
+    box-shadow: none;
+    border-bottom: 1px solid $border-primary;
+  }
+}
+
+

@@ -1,4 +1,5 @@
 @import "../../scss/index.scss";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
 
 @font-face {
   font-family: "Samsung Sharp Sans Regular";
@@ -28,7 +29,7 @@
   &__left {
     overflow: hidden;
     min-height: 100vh;
-    background-color: #0f62a2;
+    background-image: linear-gradient(to bottom, #0f62a2, #68c1f7);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -65,9 +66,10 @@
       }
     }
 
-    @media screen and (max-width: 768px)  {
+    @media screen and (max-width: 768px) {
       flex-direction: column; /* Para que los elementos se apilen en pantallas pequeñas */
       justify-content: flex-start; /* Para que la imagen no ocupe todo el ancho en pantallas pequeñas */
+      min-width: 60vh;
 
       img {
         position: static; /* Para que la imagen siga el flujo del documento en pantallas pequeñas */
@@ -77,7 +79,6 @@
       }
 
       svg {
-        margin-left: 50px; /* reducir el margen derecho del icono en pantallas pequeñas */
         font-size: 24px; /* reducir el tamaño del icono en pantallas pequeñas */
         width: 30px !important;
       }
@@ -88,7 +89,6 @@
 
       h2 {
         font-size: 20px; /* Reducir el tamaño del texto en pantallas pequeñas */
-        margin-bottom: 20px; /* Reducir el espacio entre el texto y el siguiente elemento en pantallas pequeñas */
       }
     }
   }
@@ -132,12 +132,22 @@
         width: 100%;
         border-radius: 50px;
         font-size: 20px;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: "DM Sans", sans-serif;
         padding: 10px 0;
 
         &:first-of-type {
           margin-bottom: 6%;
         }
+      }
+    }
+    @media screen and (max-width: 768px) {
+     // flex-direction: column; /* Para que los elementos se apilen en pantallas pequeñas */
+      justify-content: flex-start; /* Para que la imagen no ocupe todo el ancho en pantallas pequeñas */
+      min-width: 60vh;
+      background-image: linear-gradient(to right, #15212b, #475c67);
+
+      h2{
+        padding: 10px;
       }
     }
   }

@@ -14,6 +14,7 @@ export default function BasicModal(props) {
       onHide={() => setShow(false)}
       centered
       size="lg"
+      backdrop="true"
     >
       <Modal.Header>
         <Modal.Title>
