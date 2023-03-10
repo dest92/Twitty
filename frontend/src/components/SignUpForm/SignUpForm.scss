@@ -1,5 +1,23 @@
 @import "../../scss/index.scss";
 
+.Toastify__toast.Toastify__toast-theme--light.Toastify__toast--warning.Toastify__toast--close-on-click {
+  background-image: linear-gradient(to right, #15212b, #044f6d);
+  color: antiquewhite;
+}
+
+.Toastify__progress-bar.Toastify__progress-bar--animated.Toastify__progress-bar-theme--light.Toastify__progress-bar--warning {
+  background-image: linear-gradient(to bottom, #f1c40f, #e67e22);
+}
+
+.Toastify__toast.Toastify__toast-theme--light.Toastify__toast--success.Toastify__toast--close-on-click {
+  background-image: linear-gradient(to right, #15212b, #044f6d);
+  color: antiquewhite;
+}
+
+.Toastify__progress-bar.Toastify__progress-bar--animated.Toastify__progress-bar-theme--light.Toastify__progress-bar--success {
+  background-image: linear-gradient(to bottom, #07bc0c, #046c03);
+}
+
 .sign-up-form {
   input {
     font-size: 110%;
