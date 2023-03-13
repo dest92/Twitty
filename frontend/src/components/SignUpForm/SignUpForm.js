@@ -4,17 +4,22 @@ import { Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import { values, size } from "lodash";
 import { toast } from "react-toastify";
 import { isEmailValid } from "../../utils/validations";
+import { signUpApi } from "../../api/auth";
 
 export default function SignUpForm(props) {
-  const { setShowModal } = props;
-
   const [formData, setFormData] = useState(initialForm());
+  const { setShowModal } = props;
 
   const [signUpLoading, setSignUpLoading] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault(); //Prevents page refresh
     // console.log(formData);
+
+    if (!navigator.onLine) {
+      toast.error("No internet connection");
+      return;
+    }
 
     let validCount = 0;
 
@@ -39,10 +44,24 @@ export default function SignUpForm(props) {
         toast.warning("Name and last name must be at least 2 characters");
       } else {
         setSignUpLoading(true);
-        toast.success("Success!");
+        signUpApi(formData)
+          .then((response) => {
+            if (response.code) {
+              toast.warning(response.message);
+            } else {
+              toast.success("Success!");
+              setShowModal(false);
+              setFormData(initialForm());
+            }
+          })
+          .catch(() => {
+            toast.warning("Error from server, try again later!");
+          })
+          .finally(() => {
+            setSignUpLoading(false);
+          });
       }
     }
-    // console.log(validCount);
   };
 
   const onChange = (e) => {
@@ -105,7 +124,11 @@ export default function SignUpForm(props) {
           </Row>
         </Form.Group>
         <Button variant="primary" type="submit">
-          {!signUpLoading ? "Sign Up" : <Spinner animation="border" size="sm" />}
+          {!signUpLoading ? (
+            "Sign Up"
+          ) : (
+            <Spinner animation="border" size="sm" />
+          )}
         </Button>
       </Form>
     </div>

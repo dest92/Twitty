@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import BasicModal from "../../components/Modal/BasicModal";
 import SignUpForm from "../../components/SignUpForm";
+import SignInForm from "../../components/SignInForm";
 import WhiteLogoTwitty from "../../assets/png/logo-white.png";
 import LogoTwitty from "../../assets/png/logo.png";
 import "./SignInSignUp.scss";
@@ -82,7 +83,7 @@ function RightComponent(props) {
         </Button>
 
         <Button
-          onClick={() => openModal(<h2>Sign in</h2>)}
+          onClick={() => openModal(<SignInForm />)}
           variant="outline-primary"
         >
           Sign in
