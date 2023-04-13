@@ -30,9 +30,9 @@ export default function SignUpForm(props) {
 
     // console.log("Size: " + size(formData));
 
-    if (validCount !== 5) {
+    if (size(formData) !== validCount) {
       toast.warning("Please fill out all fields");
-      return;
+      return null;
     } else {
       if (!isEmailValid(formData.email)) {
         toast.warning("Please enter a valid email address");
@@ -130,7 +130,7 @@ export default function SignUpForm(props) {
             <Spinner animation="border" size="sm" />
           )}
         </Button>
-      </Form>
+      </Form> 
     </div>
   );
 }
